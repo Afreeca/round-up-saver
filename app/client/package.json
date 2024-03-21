@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "round-up-saver-ui",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -7,16 +7,13 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^29.5.12",
-    "@types/node": "^20.11.30",
     "@types/react": "^18.2.67",
     "@types/react-dom": "^18.2.22",
-    "@typescript-eslint/eslint-plugin": "^7.3.1",
     "@typescript-eslint/parser": "^7.3.1",
     "dotenv": "^16.4.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
-    "typescript": "^5.4.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -45,6 +42,10 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "tailwindcss": "^3.4.1"
+    "@types/node": "^20.11.30",
+    "eslint": "^8.57.0",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.4.3",
+    "typescript-eslint": "^7.3.1"
   }
 }
