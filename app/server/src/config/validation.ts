@@ -1,7 +1,6 @@
 import { plainToInstance } from 'class-transformer';
 import { IsNotEmpty, IsNumber, IsString, validateSync } from 'class-validator';
 
-// Define a class representing the structure of environment variables
 class EnvironmentVariables {
   @IsNotEmpty()
   @IsNumber()

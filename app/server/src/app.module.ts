@@ -1,10 +1,10 @@
-import { Logger, Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { validate } from './config/validation';
-import { ConfigService } from './config/customConfig';
 import { LoggerModule } from 'nestjs-pino';
+import { HttpModule } from '@nestjs/axios';
+import { AccountModule } from './account/account.module';
+import { RoundUpModule } from './roundup/roundup.module';
 
 @Module({
   imports: [
@@ -14,8 +14,11 @@ import { LoggerModule } from 'nestjs-pino';
       validate,
       envFilePath: ['.env', '.dev.env'],
     }),
+    HttpModule,
+    AccountModule,
+    RoundUpModule,
   ],
-  controllers: [AppController],
-  providers: [AppService, ConfigService, Logger],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
