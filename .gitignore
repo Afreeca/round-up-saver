@@ -1,0 +1,5 @@
+# Ignore .env files in the server directory
+server/.dev.env
+
+# Ignore .env files in the client directory
+client/.env
