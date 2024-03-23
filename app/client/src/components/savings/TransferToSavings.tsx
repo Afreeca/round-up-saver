@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { RoundUpInfo, SavingAccount } from './types';
+import { RoundUpInfo, SavingAccount } from '../types';
 import { Button, DialogActions, DialogContent } from '@mui/material';
-import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { addSavings } from 'api/account';
+import SavingAccountItem from './SavingAccountItem';
 
 export type Props = RoundUpInfo & {
   onCancel: () => void;
@@ -18,48 +19,6 @@ const TransferToSavings = ({
     (state) => state.accounts.selectedAccount
   );
   const [selectedSaving, setSelectedSaving] = useState<SavingAccount>();
-
-  const renderSavingAccounts = (savingAccounts: SavingAccount[]) => {
-    return (
-      <>
-        {savingAccounts?.map((account) => {
-          const isSelected =
-            selectedSaving?.savingsGoalUid === account.savingsGoalUid;
-          const btnTitle = isSelected ? 'selected' : 'select';
-
-          return (
-            <div key={account.savingsGoalUid}>
-              {' '}
-              {/* Add key prop */}
-              <h6 className='mt-2 mb-1'>Saving accounts</h6>
-              <div className='border-2 px-1'>
-                <div className='flex justify-between items-center'>
-                  <div>
-                    <span className='text-base font-bold'>Name:</span>{' '}
-                    <span className='text-base'>{account.name}</span>
-                    <p className='text-base font-bold'>
-                      Total Saved:&nbsp;
-                      <span className='font-bold text-lg text-green-700'>
-                        {account.totalSaved.minorUnits / 100}
-                      </span>
-                    </p>
-                  </div>
-                  <Button
-                    variant='contained'
-                    color={isSelected ? 'info' : 'inherit'}
-                    size='small'
-                    onClick={() => handleAccountSelection(account)}
-                  >
-                    {btnTitle}
-                  </Button>
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </>
-    );
-  };
 
   const handleTransferToSavings = () => {
     dispatch(
@@ -85,7 +44,16 @@ const TransferToSavings = ({
       <DialogContent>
         <div>
           {savingAccounts?.length > 0 ? (
-            renderSavingAccounts(savingAccounts)
+            savingAccounts.map((account) => (
+              <SavingAccountItem
+                key={account.savingsGoalUid}
+                account={account}
+                isSelected={
+                  selectedSaving?.savingsGoalUid === account.savingsGoalUid
+                }
+                onAccountSelection={handleAccountSelection}
+              />
+            ))
           ) : (
             <p>There are no saving accounts created</p>
           )}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { RoundUpInfo } from './types';
+import { RoundUpInfo } from '../types';
 import { Button, DialogActions, DialogContent } from '@mui/material';
 
 export type Props = RoundUpInfo & {

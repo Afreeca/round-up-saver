@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import AccountCard from './AccountCard';
 import { fetchAccounts } from '../api/account';
-import ViewTransactions from './ViewTransactions';
+import ViewTransactions from './transactions/ViewTransactions';
 import { RootState } from 'redux/store';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import Loader from './Loader';

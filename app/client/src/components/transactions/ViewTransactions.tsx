@@ -1,19 +1,15 @@
-import React, { useMemo, useState } from 'react';
-import { RoundUpInfo } from './types';
-import {
-  MaterialReactTable,
-  useMaterialReactTable,
-} from 'material-react-table';
+import React, { useState } from 'react';
+import { RoundUpInfo } from '../types';
 import { getStartOfWeek } from 'utils/date';
-import InfoIcon from './InfoIcon';
+import InfoIcon from '../InfoIcon';
 import { roundUpInfo } from 'utils/constants';
-import Modal from './Modal';
+import Modal from '../Modal';
 import { RootState } from 'redux/store';
-import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import { TRANSACTION_COLUMNS } from 'utils/common';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { fetchWeeklyRoundUp } from 'api/account';
-import RoundUp from './RounUp';
-import TransferToSavings from './TransferToSavings';
+import RoundUp from '../savings/RounUp';
+import TransferToSavings from '../savings/TransferToSavings';
+import TransactionTable from './TransactionTable';
 
 const ViewTransactions = () => {
   const dispatch = useAppDispatch();
@@ -26,14 +22,6 @@ const ViewTransactions = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(1); // State to manage current step
   const [roundupInfo, setRoundupInfo] = useState<RoundUpInfo>();
-
-  const columns = useMemo(() => TRANSACTION_COLUMNS, []);
-
-  const table = useMaterialReactTable({
-    data: transactions,
-    columns,
-    initialState: { pagination: { pageSize: 5, pageIndex: 0 } },
-  });
 
   const handleRoundUp = async () => {
     dispatch(
@@ -65,11 +53,7 @@ const ViewTransactions = () => {
     <>
       {transactions?.length > 0 ? (
         <div className='bg-stone-50 flex flex-col gap-2 z-50'>
-          <div className='w-full flex flex-col'>
-            <h5 className='flex justify-center'>This week transactions</h5>
-            <MaterialReactTable table={table} />
-          </div>
-
+          <TransactionTable />
           <div className='flex gap-1 items-center'>
             <button
               className='text-sm font-semibold bg-lime-700 text-white rounded-full px-6 py-3'
