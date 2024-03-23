@@ -6,7 +6,7 @@ import { Logger } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors();
-  app.setGlobalPrefix('api'); // add 'api' as a prefix for all api routing path
+  app.setGlobalPrefix('api');
 
   const logger = app.get(Logger);
   const configService = app.get(ConfigService);

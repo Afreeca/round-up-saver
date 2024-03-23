@@ -1,34 +1,48 @@
-
-import React from 'react';
+import React, { useEffect } from 'react';
 import AccountCard from './AccountCard';
-import { getTransactions } from '../api/account';
-import { TransactionDetails } from './types';
+import { fetchAccounts } from '../api/account';
 import ViewTransactions from './ViewTransactions';
-import { useAccountsContext } from 'context/AccountContext';
+import { RootState } from 'redux/store';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import Loader from './Loader';
+import { Alert } from '@mui/material';
+import { resetState } from '../redux/slides/accountsSlice';
 
-const MainContent = ()  => {
-  const { accounts, transactions, setSelectedAccount, setTransactions } = useAccountsContext(); 
+const MainContent = () => {
+  const dispatch = useAppDispatch();
+  const { accounts, successMessage, loading, error } = useAppSelector(
+    (state: RootState) => state.accounts
+  );
 
-  const handleFetchTransactions = async(data: TransactionDetails) => {
-    setSelectedAccount(data)
-    const result = await getTransactions(data)
-    setTransactions(result.feedItems)
-}
+  useEffect(() => {
+    dispatch(fetchAccounts());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (successMessage) {
+      const timer = setTimeout(() => {
+        dispatch(resetState());
+      }, 2000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [successMessage, dispatch]);
 
   return (
-    <div className="bg-stone-50 flex flex-col justify-center gap-2 p-10">
+    <div className='bg-stone-50 flex flex-col justify-center gap-2 p-10'>
+      {successMessage && <Alert severity='success'>{successMessage}</Alert>}
+      {error && <Alert severity='error'>{error}</Alert>}
+      {loading && <Loader />}
       <div className='flex gap-2 h-min'>
-        {accounts?.length > 0 && accounts.map(account => (
-          <AccountCard 
-            key={account.accountUid} 
-            data={account} 
-            onFetchTransactions={handleFetchTransactions}
-          />
-        ))}
+        {accounts?.length > 0
+          ? accounts.map((account) => (
+              <AccountCard key={account.accountUid} data={account} />
+            ))
+          : !loading && <p>No accounts available.</p>}
       </div>
-     { transactions?.length > 0 && <ViewTransactions/>}
+      <ViewTransactions />
     </div>
   );
-}
+};
 
 export default MainContent;

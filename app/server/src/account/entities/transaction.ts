@@ -33,5 +33,5 @@ export type TransactionInfo = {
 
 export enum Direction {
   OUT = 'OUT',
-  IN = 'IN',
+  IN = 'IN'
 }

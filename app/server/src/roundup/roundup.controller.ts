@@ -1,6 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { RoundUpService } from './roundup.service';
-import { TransactionInput } from 'src/account/entities/dto/transaction.dto';
+import { TransactionInput } from 'src/account/dto/transaction.dto';
 
 @Controller('round-up')
 export class RoundUpController {

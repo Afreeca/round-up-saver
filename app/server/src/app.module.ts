@@ -12,13 +12,13 @@ import { RoundUpModule } from './roundup/roundup.module';
     ConfigModule.forRoot({
       isGlobal: true,
       validate,
-      envFilePath: ['.env', '.dev.env'],
+      envFilePath: ['.env', '.dev.env']
     }),
     HttpModule,
     AccountModule,
-    RoundUpModule,
+    RoundUpModule
   ],
   controllers: [],
-  providers: [],
+  providers: []
 })
 export class AppModule {}

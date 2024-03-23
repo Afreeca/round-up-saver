@@ -26,4 +26,8 @@ export class ConfigService extends NestConfigService {
   get getStarSecret(): string {
     return this.get<string>('STARLING_SECRET');
   }
+
+  get getStarRefresh(): string {
+    return this.get<string>('STARLING_REFRESH');
+  }
 }
