@@ -115,6 +115,19 @@ To run the application using docker you need docker and docker-compose installed
    docker run --name round-up-ui -d -p 80:80 round-up-saver-client
    ```
 
+#### Run it using docker-compose (recommended)
+
+To run the application using docker-compose you need docker and docker-compose installed and then follow these steps:
+
+1. Alternatively you can run the app using docker-compose
+   ```bash
+   docker-compose up -d
+   ```
+   Note: to stop the app just run:
+   ```bash
+   docker-compose down
+   ```
+
 ### acess the UI application
 
 Once the application is running, you can access the UI by opening [http://localhost:80](http://localhost:80) or [http://localhost](http://localhost) in your browser

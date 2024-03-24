@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  server:
+    container_name: round-up-api
+    build:
+      context: ./app/server
+      dockerfile: Dockerfile
+    ports:
+      - '5000:5000'
+    networks:
+      - custom_network
+
+  client:
+    container_name: round-up-ui
+    build:
+      context: ./app/client
+      dockerfile: Dockerfile
+    ports:
+      - '80:80'
+    networks:
+      - custom_network
+
+networks:
+  custom_network:
+    driver: bridge
