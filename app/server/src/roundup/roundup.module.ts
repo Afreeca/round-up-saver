@@ -1,13 +1,11 @@
 import { Logger, Module } from '@nestjs/common';
-
 import { LoggerModule } from 'nestjs-pino';
 import { HttpModule } from '@nestjs/axios';
-
-import { ConfigService } from 'src/config/customConfig';
-import { RoundUpController } from './roundup.controller';
-import { RoundUpService } from './roundup.service';
-import { AccountService } from 'src/account/account.service';
-import { TokenManagementService } from 'src/security/TokenManagementService';
+import { ConfigService } from '@config/customConfig';
+import { RoundUpController } from '@roundup/roundup.controller';
+import { RoundUpService } from '@roundup/roundup.service';
+import { AccountService } from '@account/account.service';
+import { TokenManagementService } from '@security/TokenManagementService';
 
 @Module({
   imports: [LoggerModule.forRoot(), HttpModule],

@@ -2,15 +2,19 @@ import { HttpService } from '@nestjs/axios';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { AxiosResponse } from 'axios';
 import { firstValueFrom } from 'rxjs';
-import { ConfigService } from 'src/config/customConfig';
+import { ConfigService } from '@config/customConfig';
 
 @Injectable()
 export class TokenManagementService {
-  private accessToken: string;
+  private accessToken: string | undefined = undefined;
 
   constructor(private configService: ConfigService, private httpService: HttpService) {}
 
   async getAccessToken(): Promise<string> {
+    if (this.accessToken) {
+      return this.accessToken;
+    }
+
     const data = new URLSearchParams();
     data.append('grant_type', 'refresh_token');
     data.append('client_id', `${this.configService.getStarClientId}`);
@@ -24,14 +28,12 @@ export class TokenManagementService {
         })
       );
 
-      // extract access token, refresh token, and expiration time from response
       this.accessToken = response.data.access_token;
-      // TODO - store the new refresh token and the inspiraction, so we don't need to fetch the token on every single resquest
+      // TODO - extract refresh token and expiration time and store them
     } catch (error: any) {
-      console.error('Error fetching access token:', error.response?.data || error.message);
       throw new HttpException('Failed with status code 500', HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    return this.accessToken;
+    return this.accessToken as string;
   }
 }

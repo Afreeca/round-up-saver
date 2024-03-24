@@ -8,6 +8,17 @@ RoundUpSaver: Save Spare Change for Future Adventures
 
 RoundUpSaver is your personal finance companion designed to help you effortlessly save spare change from your everyday transactions. With RoundUpSaver, you can turn your loose change into meaningful savings, contributing towards your future adventures, big or small.
 
+### Product assumptions
+
+- First day of the week is Monday
+- Further explaination on the function getStartOfWeek
+
+- SCENARIO: TODAY is sunday:
+  - currentDayOfWeek will be 2, as JavaScript's getDay() method returns 0 for Sunday, 1 for Monday, and so on.
+  - daysToSubtract will be 1 -> Since Monday is the desired start of the week and it corresponds to 1,
+  - subtracting 1 from Tuesday (2), which represents the number of days to go back to Monday.
+  - if currentDayOfWeek is 0 (Sunday), we want to go back 6 days back reach Monday(our last first day of the week)
+
 ### Project directory structure
 
     ├── app/
@@ -159,30 +170,28 @@ There are only frontend UI tests. Therefore, to run tests:
 
 The following are points which we could improve or implement in order to be production ready.
 
+#### Product
+
+1. allow only one round up per week(a must)
+2. clarify with "stakeholders" the concept of first day of the week and make changes to reflect that
+
 #### Server
 
 1. Error Handling:
-   - We could implement a centralized error handling mechanism to deal with any app errors consistently. For errors from external APIs like the Starling Dev Portal, we could ensure the correct error and message is sent to the client.
-2. Improve Token Management:
-   - Instead of fetching the token every single time for every single request, we need to cache it in-memory, validate the expiration time, and fetch a new token only if the old one expires. Solutions like 'node-cache' or 'memory-cache' could be used.
-   - We could use middleware or a similar solution to process token renewal asynchronously even before it expires.
-3. Improve Logging:
-   - We could log more relevant information without exposing sensitive data.
-   - Maybe with so many logs, we could have a tool to allow us to search and find logs, like Elasticsearch.
-4. Environment Variables:
-   Create more .env files
 
-5. Error handling:
-   - we could implement a centralised error handling mechanism to deal with any app errors consistently. Or For errors from external APIs like starling dev portal we could make sure the correct error and message is sent to the client.
-6. Improve token management:
+   - We could implement a centralized error handling mechanism to deal with any app errors consistently. For errors from external APIs like the Starling Dev Portal, we could ensure the correct error and message is sent to the client.
+
+2. Improve token management:
    - instead of fetching token every single time for every single request we need to cache in-memory the last token and validate the expiration time, and we only fetch a new token if the old one expires. maybe solutions like'node-cache' or memory-cache'could be used
    - we could use a middleware or similar solution to process token renewal asynchronously even before it expires.
-7. Improve the logging allowing
+3. Improve the logging allowing
    - we could log more relevant informations without exposing sensitive data like:
    - maybe with so many logs we could have a tool to allow us to search and find logs, like Elasticsearch.
-8. Environment Variables:
+4. Environment Variables:
    - Create more .env files. For example, for production, we could have a .env.prod file. Additionally, consider using tools for secret keys management like HashiCorp Vault or cloud-based solutions.
-9. Tests:
+5. Pagination:
+   - implemente pagination if supported by external API
+6. Tests:
    - Maybe increate the unit test coverage
    - Add integraction test to ensure the different components/adapters are well integrated and working
    - add E2E tests making sure the full flow is working as intended, using tools like Cypress

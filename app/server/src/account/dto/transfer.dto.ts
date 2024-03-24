@@ -1,4 +1,4 @@
-import { CurrencyAmount } from '../entities/balance';
+import { CurrencyAmount } from '@account/entities/balance';
 
 export type TransferSaving = {
   accountUid: string;

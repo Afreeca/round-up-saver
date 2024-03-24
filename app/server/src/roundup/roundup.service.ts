@@ -1,9 +1,9 @@
 import { TransactionInput } from './../account/dto/transaction.dto';
 import { Injectable } from '@nestjs/common';
-import { AccountService } from 'src/account/account.service';
-import { Direction, TransactionInfo } from 'src/account/entities/transaction';
+import { AccountService } from '@account/account.service';
+import { Direction, TransactionInfo } from '@account/entities/transaction';
 import Decimal from 'decimal.js';
-import { RoundUpDto } from 'src/account/dto/roundUp.dt';
+import { RoundUpDto } from '@account/dto/roundUp.dt';
 
 @Injectable()
 export class RoundUpService {

@@ -4,26 +4,30 @@ import { IsNotEmpty, IsNumber, IsString, validateSync } from 'class-validator';
 class EnvironmentVariables {
   @IsNotEmpty()
   @IsNumber()
-  APP_PORT: number;
+  APP_PORT?: number;
 
   @IsNotEmpty()
   @IsString()
-  APP_NAME: string;
+  APP_NAME?: string;
 
   @IsString()
-  NODE_ENV: string;
-
-  @IsNotEmpty()
-  @IsString()
-  STARLING_SANDBOX_HOST: string;
+  NODE_ENV?: string;
 
   @IsNotEmpty()
   @IsString()
-  STARLING_CLIENT_ID: string;
+  STARLING_SANDBOX_HOST?: string;
 
   @IsNotEmpty()
   @IsString()
-  STARLING_SECRET: string;
+  STARLING_CLIENT_ID?: string;
+
+  @IsNotEmpty()
+  @IsString()
+  STARLING_SECRET?: string;
+
+  constructor(config: Partial<EnvironmentVariables>) {
+    Object.assign(this, config);
+  }
 }
 
 /**

@@ -3,31 +3,31 @@ import { ConfigService as NestConfigService } from '@nestjs/config';
 
 @Injectable()
 export class ConfigService extends NestConfigService {
-  get getAppPort(): number {
+  get getAppPort(): number | undefined {
     return this.get<number>('APP_PORT');
   }
 
-  get getAppName(): number {
+  get getAppName(): number | undefined {
     return this.get<number>('APP_NAME');
   }
 
-  get getEnvironment(): number {
+  get getEnvironment(): number | undefined {
     return this.get<number>('NODE_ENV');
   }
 
-  get getStarHost(): string {
+  get getStarHost(): string | undefined {
     return this.get<string>('STARLING_SANDBOX_HOST');
   }
 
-  get getStarClientId(): string {
+  get getStarClientId(): string | undefined {
     return this.get<string>('STARLING_CLIENT_ID');
   }
 
-  get getStarSecret(): string {
+  get getStarSecret(): string | undefined {
     return this.get<string>('STARLING_SECRET');
   }
 
-  get getStarRefresh(): string {
+  get getStarRefresh(): string | undefined {
     return this.get<string>('STARLING_REFRESH');
   }
 }

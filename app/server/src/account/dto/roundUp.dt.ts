@@ -1,4 +1,4 @@
-import { SavingAccount } from '../entities/account';
+import { SavingAccount } from '@account/entities/account';
 
 export type RoundUpDto = {
   savingAccounts: SavingAccount[];

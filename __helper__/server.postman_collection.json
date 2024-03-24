@@ -1,0 +1,294 @@
+{
+	"info": {
+		"_postman_id": "8f423fd9-cf59-4d70-b205-57124d4a1f2d",
+		"name": "round-up-saver",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3455106"
+	},
+	"item": [
+		{
+			"name": "developer portal",
+			"item": [
+				{
+					"name": "Get AcessToken",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "refresh_token",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "4SfFK4rYRjH3sLrwA4WC",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "9b6usH36dXwcE07YxoAXtoKzEF3pGuwPkB8jfnjE",
+									"type": "text"
+								},
+								{
+									"key": "refresh_token",
+									"value": "16OhKJuw4B52v063rUv8yUblyAPLDVEkACt2V5H2yuPS9W8M6s3VwcrM5FPzVRpy",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://api-sandbox.starlingbank.com/oauth/access-token",
+							"protocol": "https",
+							"host": [
+								"api-sandbox",
+								"starlingbank",
+								"com"
+							],
+							"path": [
+								"oauth",
+								"access-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Spaces",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJQUzI1NiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAA_21Ty5KjMAz8lSnOoykgDo_c5rY_sB8gLDlxDdiUbTI7tbX_viaGEFK50d16tCzxN9PeZ6cMRw3Eg_3wAV2vzblD8_Uh7ZC9Z37qYkQpqoYqIUBx0YLgOgcs2grKqhSiFZRTQTGY_4zZqaiLojyUeV69ZxpDIgpxrGYCpbSTCb9sT-x-a1pqy7ZoQNVVCaKkAzR1UUF7oAOrvKaGu1g72C82SwZ2R5WLBo6qQxBKlNC0qoO6qY9ckjhS28SMONanlOz91of52AE1SoGo2hraggjKvFOyOCDHWeaBpR15fpTkFC43q2Bw4JNjpLcnIfyMT4ImNkErzW7P99qHHbMAIhdNnph0uIOkhIDyMvA9csPfTgd-wylcrNM-rgy0IX3VNGGfgjvs0cjFmkRHIK0Jzvap0cwsmjVKuwGDtgasAjUZWgzIyQc7rHPwgHrJHtAQBj4R9xx9rPAWNnDAiPAkI5zFFd8yR_xhXqUEliIJbEGgBzwvNZO2fUJwaDzK2fOdht7KOP1WOxFg52d4ZpcsZ5Xu11ap9466RTmWrMewA34vpX14vMZVeDjbzceOW0bdcbc6j0waTsVnf1FiE1_U2sRUVF6Ypp4J4tjbGXkOIQ44jQsccT2T-P_HK4rHZB09tN-za989-yIf7Le584FnAyD99ZkaSSXqcae3VTwvOfv3H6z14EqyBAAA.LFXjyu-DX1bUR566GC1BKdbV-ZtrN63YKB689kt31vfD-S1dKy3Rg4IkOcTr_jBp9eX_owpDJZ1MuDNkIaqE4Q5IAkWQs86iX-cof_AxX4Cvzwcskdhi6P7r-AWwo2TRViZNaz_9ay1tNdCvlkqMC41K0_CIljg3YOyKDJPY75Lx8w28y54fEYpKJjf1rFaZF_Uso9HDRfzBpLkfIeYetNh8ZZgBE84axwPJKiKd9e7OhK1M6fuatmG0hUFam4fAeS9MvsCWj42P5iA4rfWi2GTi3xoRuxHZxiOwtTOY5rPgpcY2AIkCfKWmOuOE0ZuwGOiQhkWqAJkP9dsR17lcpJXot6EkHzLzMOSJcNnk6tgHyUslVu9-d1_XBX7qS1ho2XtPMhe4nWmY9sqU3itjX3tK9bN5YZadraMrK6Gkh2Xbot5cwcj7AEq6LEVbIvc7Cky18cSxf1R8h3GGjzcbNYc1poMcNRrVgzSP3BjOZKgnrIGH6yUL4HEC2Jifp_t47wwz_gIehNpbELEY0XK-WZT6sVGo9HJ01pK0XDKSWjOgeTpZz501mAoyTNQTlPzcthOkZ6Ps4EJPwcete94ggxdgjYdlRUyZ4eyILzTdvRSfu6IMJ9M9OnY76qEkBdnaPfcPtkDw9S8NxMzsPYmo7X3goLHLPNBe-p2z62MQZUU",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api-sandbox.starlingbank.com/api/v2/account/24682ee7-eaa7-4c8d-830a-2107389bf9e9/savings-goals",
+							"protocol": "https",
+							"host": [
+								"api-sandbox",
+								"starlingbank",
+								"com"
+							],
+							"path": [
+								"api",
+								"v2",
+								"account",
+								"24682ee7-eaa7-4c8d-830a-2107389bf9e9",
+								"savings-goals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Saving goal",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJQUzI1NiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAA_21Ty5KjMAz8lSnOoylMCI_c5rY_sB8gLDlxDdiUbTI7tbX_viaGEFK50d16tCzxN9PeZ6cMRw3Eg_3wAV2vzblD8_Uh7ZC9Z37qYkRRVg1VZQmKRQsl1zmgaCsoqqIs25JyEhSD-c-YnUQtRFE0h7Z5zzSGRIhStDOBUtrJhF-2J3a_NS21ZSsaUHVVQFnQAZpaVNAe6MAqr6nhLtYO9ovNkoF1e2zEERTKCsq2k9DkzQEoP5a5YMmirmJGHOtTSvZ-68N87IAapaCs2hpaQQRF3ikpDshxlnlgaUeeHyU5hcvNKhgc-OQY6e1JCD_jk6CJTdBKs9vzvfZhxyyAyEWTJyYd7iApIaC8DHyP3PC304HfcAoX67SPKwNtSF81Tdin4A57NHKxJtERSGuCs31qNDOLZo3SbsCgrQGrQE2GFgNy8sEO6xw8oF6yBzSEgU_EPUcfK7yFDRwwIjzJCGdxxbfMEX-YVymBpUgCWxDoAc9LzaRtnxAcGo9y9nynobcyTr_VTgTY-Rme2SXLWaX7tVXqvaNuUS6elB7DDvi9lPbh8RpX4eFsNx87bhl1x93qPDJpOBWf_UWJTXxRaxNTUXlhmnomiGNvZ-Q5hDjgNC5wxPVM4v8frygek3X00H7Prn337It8sN_mzgeeDYD012dqJJWox53eVvG85Ozff1HtUrCyBAAA.tRtGEeB0nD8Qywlbbx-l6XrZdcmPN6dVJkWOHN2MpX8Ay0SrpaEeiIFOxk0tbHVrU0kkBs_6rOW20C4A2REpaNTD4PetFiDWvJqzGsplQMPlFIQRqbzwJSVzhg_Bz7i0veFc70X8A98MvjeNqxPdr_wshwFe0fB3UATYchglSNjTjRxcIPAjMcBJT_3XDWJ7fI-Fj035gLNpfXWf1RFLsJrrgvILmm-1tXwpHSiJAXOQ6vSgPuTFztoS1sDcCm50EBxelIpoMfJgXBQScmIQulGwzOoBHHageM3zERB-O8nge7I1lwJstxJmGHDKthGJfOThVwp3MRL86mg2TGLkzvrvCfKoM8LVfqJNCdjtZ3ILSh9jckgMJv-Bv3D3kM7yVL5PplRz0pjA-ntAcexyBnxlv9QqpRwH6eP9rigR4lA-tvUTQmbv3sHRHKi6Cu5gqRRJdy4Tkcgkawcz71jlsCqa8d_V_K0FuH9o98PEbo_61k8GrOtoh460PG_rhpJcMJu_Bcdi5DP4vxRRzH-OS8jBDXZo1kiZxBf3uu3tjhf5ClGCosJvyMt9Itoy4cB75M7RPXM0lY7eUWw-xTDnEpct9BvXaE0KK4W44fZdRnH97SqGTw1lXc_PTVmct_k7SMD9ljApzcz3Wop9qzxMbycvKgzWVz1LYsIP-3Wci0Y",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Big Goal\",\n    \"currency\": \"GBP\"\n}\n"
+						},
+						"url": {
+							"raw": "https://api-sandbox.starlingbank.com/api/v2/account/24682ee7-eaa7-4c8d-830a-2107389bf9e9/savings-goals",
+							"protocol": "https",
+							"host": [
+								"api-sandbox",
+								"starlingbank",
+								"com"
+							],
+							"path": [
+								"api",
+								"v2",
+								"account",
+								"24682ee7-eaa7-4c8d-830a-2107389bf9e9",
+								"savings-goals"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get Balance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/accounts/balance/24682ee7-eaa7-4c8d-830a-2107389bf9e9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"accounts",
+						"balance",
+						"24682ee7-eaa7-4c8d-830a-2107389bf9e9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Accounts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/accounts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Savings",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/accounts/savings/24682ee7-eaa7-4c8d-830a-2107389bf9e9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"accounts",
+						"savings",
+						"24682ee7-eaa7-4c8d-830a-2107389bf9e9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Transactions",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"accountUid\": \"24682ee7-eaa7-4c8d-830a-2107389bf9e9\",\n  \"categoryUid\": \"2468485f-373e-42d6-9545-152569037a3b\",\n  \"changesSince\": \"2024-03-24T19:09:46.523Z\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/accounts/transactions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"accounts",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create round-up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"accountUid\": \"24682ee7-eaa7-4c8d-830a-2107389bf9e9\",\n  \"categoryUid\": \"2468485f-373e-42d6-9545-152569037a3b\",\n  \"changesSince\": \"2024-03-21T20:06:29.460Z\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/round-up",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"round-up"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add-saving",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"accountUid\": \"24682ee7-eaa7-4c8d-830a-2107389bf9e9\",\n    \"savingsGoalUid\": \"2a870651-145c-4136-a988-73dd2d7d499d\",\n    \"amount\": {\n        \"currency\": \"GBP\",\n    \"minorUnits\": 221\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/accounts/add-saving",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"accounts",
+						"add-saving"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

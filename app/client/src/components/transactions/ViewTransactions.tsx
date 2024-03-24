@@ -13,14 +13,12 @@ import TransactionTable from './TransactionTable';
 
 const ViewTransactions = () => {
   const dispatch = useAppDispatch();
-  const { transactions, loading } = useAppSelector(
+  const { transactions, selectedAccount, loading } = useAppSelector(
     (state: RootState) => state.accounts
   );
-  const selectedAccount = useAppSelector(
-    (state: RootState) => state.accounts.selectedAccount
-  );
+
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentStep, setCurrentStep] = useState(1); // State to manage current step
+  const [currentStep, setCurrentStep] = useState(1);
   const [roundupInfo, setRoundupInfo] = useState<RoundUpInfo>();
 
   const handleRoundUp = async () => {
@@ -42,12 +40,8 @@ const ViewTransactions = () => {
 
   const handleModalClose = () => {
     setIsModalOpen(false);
-    setCurrentStep(1); // Reset
+    setCurrentStep(1); // reset steps
   };
-
-  if (transactions.length <= 0) {
-    return null;
-  }
 
   return (
     <>
@@ -89,7 +83,12 @@ const ViewTransactions = () => {
           </Modal>
         </div>
       ) : (
-        !loading && <p>No transactions available.</p>
+        !loading &&
+        selectedAccount && (
+          <div className='flex  justify-center m-5'>
+            <p>No transactions available.</p>
+          </div>
+        )
       )}
     </>
   );

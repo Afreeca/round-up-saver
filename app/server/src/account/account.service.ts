@@ -1,19 +1,18 @@
 import { HttpService } from '@nestjs/axios';
 import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { lastValueFrom } from 'rxjs';
-import { ConfigService } from 'src/config/customConfig';
-import { AccountInfo, SavingAccountInfo } from './entities/account';
+import { ConfigService } from '@config/customConfig';
+import { AccountInfo, SavingAccountInfo } from '@account/entities/account';
 import { v4 as uuidv4 } from 'uuid';
-import { BalanceInfo } from './entities/balance';
-import { TransactionInput } from './dto/transaction.dto';
-import { TransactionInfo } from './entities/transaction';
-import { TokenManagementService } from 'src/security/TokenManagementService';
-import { TransferSaving } from './dto/transfer.dto';
+import { BalanceInfo } from '@account/entities/balance';
+import { TransactionInput } from '@account/dto/transaction.dto';
+import { TransactionInfo } from '@account/entities/transaction';
+import { TokenManagementService } from '@security/TokenManagementService';
+import { TransferSaving } from '@account/dto/transfer.dto';
 
 @Injectable()
 export class AccountService {
   private readonly logger: Logger;
-
   constructor(
     private configService: ConfigService,
     private readonly httpService: HttpService,
@@ -22,7 +21,7 @@ export class AccountService {
     this.logger = new Logger(AccountService.name);
   }
 
-  async getUserAccounts() {
+  async getUserAccounts(): Promise<AccountInfo> {
     const accessToken = await this.tokenService.getAccessToken();
 
     try {
@@ -41,7 +40,7 @@ export class AccountService {
     }
   }
 
-  async getAccountBalance(accountUid: string) {
+  async getAccountBalance(accountUid: string): Promise<BalanceInfo> {
     const accessToken = await this.tokenService.getAccessToken();
     try {
       const headers = {
@@ -58,7 +57,7 @@ export class AccountService {
     }
   }
 
-  async getTransactions({ accountUid, categoryUid, changesSince }: TransactionInput) {
+  async getTransactions({ accountUid, categoryUid, changesSince }: TransactionInput): Promise<TransactionInfo> {
     const accessToken = await this.tokenService.getAccessToken();
     try {
       const headers = {
@@ -75,7 +74,7 @@ export class AccountService {
     }
   }
 
-  async getSavingsAccount(accountUid: string) {
+  async getSavingsAccount(accountUid: string): Promise<SavingAccountInfo> {
     const accessToken = await this.tokenService.getAccessToken();
     try {
       const headers = {
@@ -92,7 +91,7 @@ export class AccountService {
     }
   }
 
-  async transferToSaving({ accountUid, savingsGoalUid, amount }: TransferSaving) {
+  async transferToSaving({ accountUid, savingsGoalUid, amount }: TransferSaving): Promise<SavingAccountInfo> {
     const accessToken = await this.tokenService.getAccessToken();
     const transferUid = uuidv4();
 
@@ -102,6 +101,7 @@ export class AccountService {
         Authorization: `Bearer ${accessToken}`
       };
 
+      this.logger.log('Transfer to saving account');
       const url = `${this.configService.getStarHost}/api/v2/account/${accountUid}/savings-goals/${savingsGoalUid}/add-money/${transferUid}`;
 
       const response = await lastValueFrom(this.httpService.put<SavingAccountInfo>(url, { amount }, { headers }));

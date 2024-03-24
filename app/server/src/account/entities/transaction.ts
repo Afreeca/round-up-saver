@@ -1,4 +1,4 @@
-import { CurrencyAmount } from './balance';
+import { CurrencyAmount } from '@account/entities/balance';
 
 export type TransactionItem = {
   feedItemUid: string;

@@ -12,7 +12,7 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
   const appName = configService.getAppName;
   const env = configService.getEnvironment;
-  const port = configService.getAppPort;
+  const port = configService.getAppPort || 3000;
 
   logger.log({ msg: 'Server started', port, appName, env });
   await app.listen(port);
