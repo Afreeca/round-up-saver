@@ -1,9 +1,9 @@
 import React from 'react';
-import { AccountProps, TransactionDetails } from './types';
+import { AccountProps, TransactionDetails } from '../types';
 import { fDate, getStartOfWeek } from 'utils/date';
-import { useAppDispatch } from '../redux/hooks';
+import { useAppDispatch } from '../../redux/hooks';
 import { fetchTransactions } from 'api/account';
-import { setSelectedAccount } from '../redux/slides/accountsSlice';
+import { setSelectedAccount } from '../../redux/slides/accountsSlice';
 
 const Account = ({ data }: AccountProps) => {
   const dispatch = useAppDispatch();

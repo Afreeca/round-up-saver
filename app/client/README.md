@@ -1,46 +1,21 @@
-# Getting Started with Create React App
+## Title: round-up Client
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Explanation of Technical Decisions
 
-In the project directory, you can run:
+1. Function => getStartOfWeek
+   to further understand this function that returns the first day of the current week we can take a closer look to the follow scenario
 
-### `npm start`
+SCENARIO: TODAY is sunday:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **currentDayOfWeek** will be 2
+  - as JavaScript's getDay() method returns 0 for Sunday, 1 for Monday, and so on.
+- **daysToSubtract** will be 1
+  - Since Monday is the desired start of the week and it corresponds to 1, and today is Tuesday. Tuesday back to monday is just 1 day
+- if **currentDayOfWeek** is 0 (Sunday), we want to go back 6 days back reach Monday(our last first day of the week)
+- **beginningOfWeek** will hold Monday of the particular week
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+2. Memoize AccountCard component
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- we could have memoize AccountCard component to prevent its re-render but it this case it is a very small component, and we should avoid using an memoized technique if there are no performance issues.

@@ -28,6 +28,6 @@ export const getStartOfWeek = () => {
 
   var beginningOfWeek = new Date(currentDate);
   beginningOfWeek.setDate(currentDate.getDate() - daysToSubtract); // subtract days till the first day of the week
-
+  beginningOfWeek.setHours(0, 0, 0, 0);
   return beginningOfWeek.toISOString();
 };

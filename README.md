@@ -11,13 +11,6 @@ RoundUpSaver is your personal finance companion designed to help you effortlessl
 ### Product assumptions
 
 - First day of the week is Monday
-- Further explaination on the function getStartOfWeek
-
-- SCENARIO: TODAY is sunday:
-  - currentDayOfWeek will be 2, as JavaScript's getDay() method returns 0 for Sunday, 1 for Monday, and so on.
-  - daysToSubtract will be 1 -> Since Monday is the desired start of the week and it corresponds to 1,
-  - subtracting 1 from Tuesday (2), which represents the number of days to go back to Monday.
-  - if currentDayOfWeek is 0 (Sunday), we want to go back 6 days back reach Monday(our last first day of the week)
 
 ### Project directory structure
 
@@ -174,6 +167,7 @@ The following are points which we could improve or implement in order to be prod
 
 1. allow only one round up per week(a must)
 2. clarify with "stakeholders" the concept of first day of the week and make changes to reflect that
+3. Missing -> check the balance before transfering amount to savings goal
 
 #### Server
 

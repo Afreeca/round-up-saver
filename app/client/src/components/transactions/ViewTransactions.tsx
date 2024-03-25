@@ -13,8 +13,16 @@ import TransactionTable from './TransactionTable';
 
 const ViewTransactions = () => {
   const dispatch = useAppDispatch();
-  const { transactions, selectedAccount, loading } = useAppSelector(
-    (state: RootState) => state.accounts
+  const transactions = useAppSelector(
+    (state: RootState) => state.accounts.transactions
+  );
+
+  const selectedAccount = useAppSelector(
+    (state: RootState) => state.accounts.selectedAccount
+  );
+
+  const isLoading = useAppSelector(
+    (state: RootState) => state.accounts.loading
   );
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -45,7 +53,7 @@ const ViewTransactions = () => {
 
   return (
     <>
-      {transactions?.length > 0 ? (
+      {transactions?.length > 0 && selectedAccount ? (
         <div className='bg-stone-50 flex flex-col gap-2 z-50'>
           <TransactionTable />
           <div className='flex gap-1 items-center'>
@@ -83,7 +91,7 @@ const ViewTransactions = () => {
           </Modal>
         </div>
       ) : (
-        !loading &&
+        !isLoading &&
         selectedAccount && (
           <div className='flex  justify-center m-5'>
             <p>No transactions available.</p>

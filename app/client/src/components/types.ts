@@ -94,3 +94,7 @@ export type TransferSaving = {
   savingsGoalUid: string;
   amount: CurrencyAmount;
 };
+
+export type CardViewerProps = {
+  accounts: Account[];
+};

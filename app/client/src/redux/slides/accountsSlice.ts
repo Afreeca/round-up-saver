@@ -28,11 +28,11 @@ const accountsSlice = createSlice({
       state.successMessage = action.payload;
     },
     resetState(state) {
-      state.selectedAccount = null;
-      state.transactions = [];
-      state.successMessage = undefined;
-      state.loading = false;
-      state.error = null;
+      state.selectedAccount = initialState.selectedAccount;
+      state.transactions = initialState.transactions;
+      state.successMessage = initialState.successMessage;
+      state.loading = initialState.loading;
+      state.error = initialState.error;
     },
   },
   extraReducers: (builder) => {

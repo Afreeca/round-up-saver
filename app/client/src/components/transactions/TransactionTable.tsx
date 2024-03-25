@@ -8,7 +8,9 @@ import { useAppSelector } from '../../redux/hooks';
 import { TRANSACTION_COLUMNS } from 'utils/common';
 
 const TransactionTable = () => {
-  const { transactions } = useAppSelector((state: RootState) => state.accounts);
+  const transactions = useAppSelector(
+    (state: RootState) => state.accounts.transactions
+  );
 
   const columns = useMemo(() => TRANSACTION_COLUMNS, []);
 
