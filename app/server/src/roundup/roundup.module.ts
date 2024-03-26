@@ -6,10 +6,11 @@ import { RoundUpController } from '@roundup/roundup.controller';
 import { RoundUpService } from '@roundup/roundup.service';
 import { AccountService } from '@account/account.service';
 import { TokenManagementService } from '@security/TokenManagementService';
+import { UuidGenerator } from '@config/uuidGenerator';
 
 @Module({
   imports: [LoggerModule.forRoot(), HttpModule],
   controllers: [RoundUpController],
-  providers: [RoundUpService, ConfigService, AccountService, TokenManagementService, Logger]
+  providers: [RoundUpService, ConfigService, AccountService, TokenManagementService, Logger, UuidGenerator]
 })
 export class RoundUpModule {}

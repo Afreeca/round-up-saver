@@ -4,8 +4,8 @@ export const TRANSACTIONS = [
   {
     feedItemUid: '1',
     categoryUid: 'category_1',
-    amount: { value: 100, currency: 'GBP' },
-    sourceAmount: { value: 100, currency: 'GBP' },
+    amount: { minorUnits: 100, currency: 'GBP' },
+    sourceAmount: { minorUnits: 100, currency: 'GBP' },
     direction: Direction.OUT,
     updatedAt: '2024-03-24T12:00:00Z',
     transactionTime: '2024-03-24T12:00:00Z',
@@ -27,8 +27,8 @@ export const TRANSACTIONS = [
   {
     feedItemUid: '2',
     categoryUid: 'category_2',
-    amount: { value: 50, currency: 'EUR' },
-    sourceAmount: { value: 50, currency: 'EUR' },
+    amount: { minorUnits: 50, currency: 'EUR' },
+    sourceAmount: { minorUnits: 50, currency: 'EUR' },
     direction: Direction.IN,
     updatedAt: '2024-03-25T10:00:00Z',
     transactionTime: '2024-03-25T10:00:00Z',
@@ -50,8 +50,8 @@ export const TRANSACTIONS = [
   {
     feedItemUid: '3',
     categoryUid: 'category_3',
-    amount: { value: 200, currency: 'GBP' },
-    sourceAmount: { value: 200, currency: 'GBP' },
+    amount: { minorUnits: 200, currency: 'GBP' },
+    sourceAmount: { minorUnits: 200, currency: 'GBP' },
     direction: Direction.OUT,
     updatedAt: '2024-03-26T15:00:00Z',
     transactionTime: '2024-03-26T15:00:00Z',
@@ -73,5 +73,5 @@ export const TRANSACTIONS = [
 ];
 
 export const TRANSACTIONS_INFO = {
-  '1': { feedItems: [TRANSACTIONS] }
+  '1': { feedItems: TRANSACTIONS }
 };

@@ -1,14 +1,15 @@
 import { HttpService } from '@nestjs/axios';
 import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { lastValueFrom } from 'rxjs';
+import { v4 as uuidv4 } from 'uuid';
 import { ConfigService } from '@config/customConfig';
 import { AccountInfo, SavingAccountInfo } from '@account/entities/account';
-import { v4 as uuidv4 } from 'uuid';
 import { BalanceInfo } from '@account/entities/balance';
 import { TransactionInput } from '@account/dto/transaction.dto';
 import { TransactionInfo } from '@account/entities/transaction';
 import { TokenManagementService } from '@security/TokenManagementService';
 import { TransferSaving } from '@account/dto/transfer.dto';
+import { UuidGenerator } from '@config/uuidGenerator';
 
 @Injectable()
 export class AccountService {
@@ -16,7 +17,8 @@ export class AccountService {
   constructor(
     private configService: ConfigService,
     private readonly httpService: HttpService,
-    private tokenService: TokenManagementService
+    private tokenService: TokenManagementService,
+    private readonly uuidGenerator: UuidGenerator
   ) {
     this.logger = new Logger(AccountService.name);
   }
@@ -34,9 +36,9 @@ export class AccountService {
       const url = `${this.configService.getStarHost}/api/v2/accounts`;
       const response = await lastValueFrom(this.httpService.get<AccountInfo>(url, { headers }));
       return response.data;
-    } catch (err: unknown) {
-      this.logger.log('Getting user account');
-      throw new HttpException('Failed with status code 500', HttpStatus.INTERNAL_SERVER_ERROR);
+    } catch (error) {
+      this.logger.error('Failed to retrieve accounts', error);
+      throw new HttpException('Failed to retrieve accounts', HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -53,7 +55,7 @@ export class AccountService {
       const response = await lastValueFrom(this.httpService.get<BalanceInfo>(url, { headers }));
       return response.data;
     } catch (err: unknown) {
-      throw new HttpException('Failed with status code 500', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException('Failed to retrieve balance', HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -70,7 +72,7 @@ export class AccountService {
       const response = await lastValueFrom(this.httpService.get<TransactionInfo>(url, { headers }));
       return response.data;
     } catch (err: unknown) {
-      throw new HttpException('Failed with status code 500', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException('Failed to retrieve transactions', HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -87,14 +89,13 @@ export class AccountService {
       const response = await lastValueFrom(this.httpService.get<SavingAccountInfo>(url, { headers }));
       return response.data;
     } catch (err: unknown) {
-      throw new HttpException('Failed with status code 500', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException('Failed to retrieve savings', HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
   async transferToSaving({ accountUid, savingsGoalUid, amount }: TransferSaving): Promise<SavingAccountInfo> {
     const accessToken = await this.tokenService.getAccessToken();
-    const transferUid = uuidv4();
-
+    const transferUid = this.uuidGenerator.generateUUID();
     try {
       const headers = {
         Accept: 'application/json',
@@ -102,12 +103,14 @@ export class AccountService {
       };
 
       this.logger.log('Transfer to saving account');
-      const url = `${this.configService.getStarHost}/api/v2/account/${accountUid}/savings-goals/${savingsGoalUid}/add-money/${transferUid}`;
+      const url = `${
+        this.configService.getStarHost
+      }/api/v2/account/${accountUid}/savings-goals/${savingsGoalUid}/add-money/${transferUid ?? uuidv4()}`;
 
       const response = await lastValueFrom(this.httpService.put<SavingAccountInfo>(url, { amount }, { headers }));
       return response.data;
     } catch (err: unknown) {
-      throw new HttpException('Failed with status code 500', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException('Failed to add savings', HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 }

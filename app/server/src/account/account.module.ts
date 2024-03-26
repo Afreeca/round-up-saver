@@ -5,10 +5,11 @@ import { HttpModule } from '@nestjs/axios';
 import { AccountController } from '@account/account.controller';
 import { AccountService } from '@account/account.service';
 import { ConfigService } from '@config/customConfig';
+import { UuidGenerator } from '@config/uuidGenerator';
 
 @Module({
   imports: [LoggerModule.forRoot(), HttpModule],
   controllers: [AccountController],
-  providers: [AccountService, ConfigService, TokenManagementService, Logger]
+  providers: [UuidGenerator, AccountService, ConfigService, TokenManagementService, Logger]
 })
 export class AccountModule {}

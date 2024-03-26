@@ -5,6 +5,7 @@ import { LoggerModule } from 'nestjs-pino';
 import { HttpModule } from '@nestjs/axios';
 import { AccountModule } from './account/account.module';
 import { RoundUpModule } from './roundup/roundup.module';
+import { UuidGenerator } from '@config/uuidGenerator';
 
 @Module({
   imports: [
@@ -19,6 +20,6 @@ import { RoundUpModule } from './roundup/roundup.module';
     RoundUpModule
   ],
   controllers: [],
-  providers: []
+  providers: [UuidGenerator]
 })
 export class AppModule {}
