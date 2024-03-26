@@ -30,4 +30,8 @@ export class ConfigService extends NestConfigService {
   get getStarRefresh(): string | undefined {
     return this.get<string>('STARLING_REFRESH');
   }
+
+  get getStarAccessToken(): string | undefined {
+    return this.get<string>('STARLING_ACCESS_TOKEN');
+  }
 }

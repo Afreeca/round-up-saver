@@ -1,5 +1,5 @@
 import { HttpService } from '@nestjs/axios';
-import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
+import { HttpException, HttpStatus, Inject, Injectable, Logger } from '@nestjs/common';
 import { lastValueFrom } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 import { ConfigService } from '@config/customConfig';
@@ -103,9 +103,7 @@ export class AccountService {
       };
 
       this.logger.log('Transfer to saving account');
-      const url = `${
-        this.configService.getStarHost
-      }/api/v2/account/${accountUid}/savings-goals/${savingsGoalUid}/add-money/${transferUid ?? uuidv4()}`;
+      const url = `${this.configService.getStarHost}/api/v2/account/${accountUid}/savings-goals/${savingsGoalUid}/add-money/${transferUid}`;
 
       const response = await lastValueFrom(this.httpService.put<SavingAccountInfo>(url, { amount }, { headers }));
       return response.data;
