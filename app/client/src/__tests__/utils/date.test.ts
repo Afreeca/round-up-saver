@@ -1,4 +1,4 @@
-import { fDate, fDateTimeBritish, getStartOfWeek } from '../date';
+import { fDate, fDateTimeBritish, getStartOfWeek } from '../../utils/date';
 import { format } from 'date-fns';
 
 describe('fDate', () => {

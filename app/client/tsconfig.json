@@ -14,5 +14,5 @@
     "allowJs": true
   },
   "exclude": ["node_modules", "public", "jest"],
-  "include": ["src"]
+  "include": ["src", "src/components/__test__/.test.tsx"]
 }

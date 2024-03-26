@@ -2,7 +2,7 @@ import { Direction } from 'components/types';
 import { fDateTimeBritish } from './date';
 import React from 'react';
 
-const getRowColor = (direction: Direction) => {
+export const getDirectionColor = (direction: Direction) => {
   if (direction === Direction.IN) {
     return 'text-green-600';
   } else if (direction === Direction.OUT) {
@@ -17,7 +17,7 @@ export const TRANSACTION_COLUMNS = [
     accessorKey: 'direction',
     header: 'Direction',
     Cell: ({ renderedCellValue }: { renderedCellValue: any; row: any }) => (
-      <div className={`${getRowColor(renderedCellValue)}`}>
+      <div className={`${getDirectionColor(renderedCellValue)}`}>
         <span>{renderedCellValue}</span>
       </div>
     ),
