@@ -57,7 +57,22 @@ Follow the instructions provided in the official documentation for your OS
 - docker -> https://www.docker.com/get-started/
 - docker-compose -> https://docs.docker.com/compose/install/
 
+Note: Do not forget to create a file .dev.env inside of server, get your starling developer portal keys and add them to file, check
+
 ## How to run the application
+
+Before you run the application you need to add Starling developer portal keys to the application
+
+1. Create a Starling developer portal account,and create the necessary keys and account, inside of the folder** helper ** you can find the technical challenge doc with all the information, steps how to create and set up your account and generate the keys.
+2. Create .dev.env file in the server
+   1. from the root folder (round-up-saver), navigate to server folder:
+      ```bash
+         cd app/server
+      ```
+   2. create the file
+3. check the .env.dev.example to see all the environment variables you need to set up before you can successufly run the app.
+
+**Note:** inside of helper you also have a postman collection which allows you to directly test the api endpoints
 
 #### Run it using Docker Compose (Recommended)
 
@@ -145,18 +160,25 @@ If you encounter port conflicts, it might be due to other applications using the
 
 ### Run tests
 
-There are only frontend UI tests. Therefore, to run tests:
+There are server and client tests. Therefore, to run tests:
 
-1. Navigate to UI folder::
+1. Navigate to folder(client or server) you wish to run the test::
 
    ```bash
-   cd app/ui
+   cd app/server
+
+   ```
+
+   or
+
+   ```bash
+   cd app/client
 
    ```
 
 2. Use the following command to run all the tests:
    ```bash
-   npm test
+   npm run test
    ```
 
 ### Improvements(production ready)
