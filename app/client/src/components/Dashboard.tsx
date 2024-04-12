@@ -1,8 +1,8 @@
-import React from 'react';
 import Header from 'components/Header';
-import Messsages from 'components/Messages';
-import MainContent from 'components/MainContent';
 import Loader from 'components/Loader';
+import MainContent from 'components/MainContent';
+import Messsages from 'components/Messages';
+import React from 'react';
 
 function Dashboard() {
   return (

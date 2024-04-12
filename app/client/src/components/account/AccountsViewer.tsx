@@ -1,8 +1,8 @@
+import { fetchAccounts } from 'api/account';
 import React, { useEffect } from 'react';
-import AccountCard from './AccountCard';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { RootState } from '../../redux/store';
-import { fetchAccounts } from 'api/account';
+import AccountCard from './AccountCard';
 
 const AccountsViewer = () => {
   const dispatch = useAppDispatch();
@@ -18,10 +18,16 @@ const AccountsViewer = () => {
   }, [dispatch]);
 
   return (
-    <div className='flex gap-2 h-min'>
-      {accounts.length > 0
+    <div
+      className='flex gap-2 h-min'
+      data-cy='account-viewer'
+    >
+      {accounts?.length > 0
         ? accounts.map((account) => (
-            <AccountCard key={account.accountUid} data={account} />
+            <AccountCard
+              key={account.accountUid}
+              data={account}
+            />
           ))
         : !isLoading && <p>No accounts available.</p>}
     </div>

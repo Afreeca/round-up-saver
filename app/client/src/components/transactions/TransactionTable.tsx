@@ -1,11 +1,11 @@
-import React, { useMemo } from 'react';
 import {
   MaterialReactTable,
   useMaterialReactTable,
 } from 'material-react-table';
-import { RootState } from '../../redux/store';
-import { useAppSelector } from '../../redux/hooks';
+import React, { useMemo } from 'react';
 import { TRANSACTION_COLUMNS } from 'utils/common';
+import { useAppSelector } from '../../redux/hooks';
+import { RootState } from '../../redux/store';
 
 const TransactionTable = () => {
   const transactions = useAppSelector(

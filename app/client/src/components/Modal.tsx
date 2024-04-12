@@ -10,9 +10,17 @@ type ModalProps = {
 
 const Modal: FC<ModalProps> = ({ open, title, onClose, children }) => {
   return (
-    <Dialog open={open} onClose={onClose} fullWidth>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      fullWidth
+      data-cy='modal'
+    >
       <DialogTitle>
-        <Box display='flex' flexDirection='column'>
+        <Box
+          display='flex'
+          flexDirection='column'
+        >
           <Typography variant='h5'>{title}</Typography>
         </Box>
       </DialogTitle>

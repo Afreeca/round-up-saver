@@ -7,11 +7,23 @@ const Loader = () => {
     (state: RootState) => state.accounts.loading
   );
 
-  return isLoading ? (
-    <div className='fixed top-20 left-0 w-full h-full flex justify-center items-center z-50'>
-      <div className='animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900'></div>
+  return (
+    <div
+      className='fixed top-20 left-0 w-full h-full flex justify-center items-center z-50'
+      data-cy='spinner'
+    >
+      <div
+        style={{
+          border: '4px solid rgba(0, 0, 0, 0.1)',
+          borderTop: '4px solid #000',
+          borderRadius: '50%',
+          width: '40px',
+          height: '40px',
+          animation: 'spin 1s linear infinite',
+        }}
+      ></div>
     </div>
-  ) : null;
+  );
 };
 
 export default Loader;

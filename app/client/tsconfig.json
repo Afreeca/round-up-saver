@@ -4,15 +4,17 @@
     "baseUrl": "src",
     "target": "esnext",
     "jsx": "react",
-    "lib": ["dom", "es2015", "es2017", "esnext"],
+    "lib": ["dom", "es5", "es2017"],
     "strict": true,
     "noEmit": true,
     "isolatedModules": true,
     "esModuleInterop": true,
     "strictNullChecks": false,
     "noUnusedLocals": false,
-    "allowJs": true
+    "allowJs": true,
+    "types": ["cypress", "node"],
+    "typeRoots": ["node_modules/@types"]
   },
-  "exclude": ["node_modules", "public", "jest"],
-  "include": ["src", "src/components/__test__/.test.tsx"]
+  "exclude": ["public", "cypress.config.ts", "cypress", "node_modules"],
+  "include": ["src", "cypress/**/*.tsx", "**/*.ts"]
 }
