@@ -15,17 +15,20 @@ const TransactionTable = () => {
   const columns = useMemo(() => TRANSACTION_COLUMNS, []);
 
   const table = useMaterialReactTable({
-    data: transactions,
+    data: transactions || [],
     columns,
     initialState: { pagination: { pageSize: 5, pageIndex: 0 } },
   });
 
-  return (
-    <div className='w-full flex flex-col'>
+  return transactions?.length > 0 ? (
+    <div
+      className='w-full flex flex-col'
+      data-cy='transaction-table'
+    >
       <h5 className='flex justify-center'>This week transactions</h5>
       <MaterialReactTable table={table} />
     </div>
-  );
+  ) : null;
 };
 
 export default TransactionTable;

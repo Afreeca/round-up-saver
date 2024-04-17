@@ -37,9 +37,15 @@ describe('Modal component', () => {
       'have.text',
       'Test Modal'
     );
-    cy.get('[data-cy=modal-content]').should('have.text', 'Modal Content');
+    cy.getByTestId('modal-content').should('have.text', 'Modal Content');
     cy.get('button').should('have.text', 'Close');
-    cy.get('[data-cy=closeModal]').click();
+    cy.getByTestId('closeModal').click();
+    cy.get('@onClose').should('have.been.calledOnce');
+  });
+
+  it('trigger close if clicked', () => {
+    cy.get('button').should('have.text', 'Close');
+    cy.getByTestId('closeModal').click();
     cy.get('@onClose').should('have.been.calledOnce');
   });
 });

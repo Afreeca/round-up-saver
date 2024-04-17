@@ -2,7 +2,7 @@ export type AccountsState = {
   accounts: Account[];
   selectedAccount: Account | null;
   transactions: TransactionItem[];
-  successMessage: undefined | string;
+  successMessage: undefined | null | string;
   loading: boolean;
   error: string | null | undefined;
 };

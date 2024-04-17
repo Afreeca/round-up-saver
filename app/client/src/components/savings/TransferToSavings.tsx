@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { RoundUpInfo, SavingAccount } from '../types';
 import { Button, DialogActions, DialogContent } from '@mui/material';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { addSavings } from 'api/account';
+import React, { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { RoundUpInfo, SavingAccount } from '../types';
 import SavingAccountItem from './SavingAccountItem';
 
-export type Props = RoundUpInfo & {
+export type Props = Partial<RoundUpInfo> & {
   onCancel: () => void;
 };
 
@@ -18,9 +18,15 @@ const TransferToSavings = ({
   const selectedAccount = useAppSelector(
     (state) => state.accounts.selectedAccount
   );
-  const [selectedSaving, setSelectedSaving] = useState<SavingAccount>();
+  const [selectedSaving, setSelectedSaving] = useState<SavingAccount | null>(
+    null
+  );
 
   const handleTransferToSavings = () => {
+    if (!selectedAccount || !selectedSaving || !totalRoundUpAmount) {
+      return;
+    }
+
     dispatch(
       addSavings({
         accountUid: selectedAccount.accountUid,
@@ -34,7 +40,7 @@ const TransferToSavings = ({
   };
 
   const handleAccountSelection = (account: SavingAccount) => {
-    setSelectedSaving((prev: SavingAccount) =>
+    setSelectedSaving((prev: SavingAccount | null) =>
       prev?.savingsGoalUid === account.savingsGoalUid ? null : account
     );
   };
@@ -43,7 +49,7 @@ const TransferToSavings = ({
     <>
       <DialogContent>
         <div>
-          {savingAccounts?.length > 0 ? (
+          {savingAccounts && savingAccounts?.length > 0 ? (
             savingAccounts.map((account) => (
               <SavingAccountItem
                 key={account.savingsGoalUid}

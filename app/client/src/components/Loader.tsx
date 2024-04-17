@@ -7,7 +7,7 @@ const Loader = () => {
     (state: RootState) => state.accounts.loading
   );
 
-  return (
+  return isLoading ? (
     <div
       className='fixed top-20 left-0 w-full h-full flex justify-center items-center z-50'
       data-cy='spinner'
@@ -23,7 +23,7 @@ const Loader = () => {
         }}
       ></div>
     </div>
-  );
+  ) : null;
 };
 
 export default Loader;

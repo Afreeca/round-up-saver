@@ -16,7 +16,10 @@ const Account = ({ data }: AccountProps) => {
   };
 
   return (
-    <div className='bg-white rounded-lg shadow-md'>
+    <div
+      className='bg-white rounded-lg shadow-md'
+      data-cy='account-card'
+    >
       <div className='p-4'>
         <h2 className='text-xl font-semibold text-gray-800'>
           Account Information

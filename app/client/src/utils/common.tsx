@@ -1,6 +1,6 @@
 import { Direction } from 'components/types';
-import { fDateTimeBritish } from './date';
 import React from 'react';
+import { fDateTimeBritish } from './date';
 
 export const getDirectionColor = (direction: Direction) => {
   if (direction === Direction.IN) {
@@ -44,3 +44,23 @@ export const TRANSACTION_COLUMNS = [
     header: 'Status',
   },
 ];
+
+export const isObjectEmpty = (obj: any) => {
+  if (obj === null || obj === undefined) {
+    return true;
+  }
+
+  if (Array.isArray(obj)) {
+    return obj.length === 0;
+  }
+
+  if (typeof obj === 'string') {
+    return obj.trim().length === 0;
+  }
+
+  if (typeof obj === 'object' && Object.keys(obj).length === 0) {
+    return true;
+  }
+
+  return false;
+};

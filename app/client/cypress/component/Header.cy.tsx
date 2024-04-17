@@ -7,17 +7,22 @@ describe('Test header', () => {
   });
 
   it('header should display', () => {
-    cy.get('[data-cy=header]').should('exist');
+    cy.getByTestId('header').should('exist');
   });
 
   it('alt text should display when image src not found', () => {
-    cy.get('[data-cy="header"] img').invoke('removeAttr', 'src');
-    cy.get('[data-cy=header] img').should('have.attr', 'alt', 'starling logo');
+    cy.getByTestId('header').find('img').invoke('removeAttr', 'src');
+    cy.getByTestId('header')
+      .find('img')
+      .should('have.attr', 'alt', 'starling logo');
   });
 
   it('logo should display', () => {
-    cy.get('[data-cy=header] img').should('attr', 'src', 'assets/logo.svg');
-    cy.get('[data-cy="header"] img')
+    cy.getByTestId('header')
+      .find('img')
+      .should('attr', 'src', 'assets/logo.svg');
+    cy.getByTestId('header')
+      .find('img')
       .should('have.attr', 'src')
       .and('not.be.empty');
   });

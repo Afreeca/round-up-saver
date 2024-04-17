@@ -181,35 +181,6 @@ There are server and client tests. Therefore, to run tests:
    npm run test
    ```
 
-## Cypress
-
-### Commands
-
-1. launch the cypress test runner
-
-```bash
-   npm run cy:open
-```
-
-2. run componen tests
-
-```bash
-   npm run cy:component
-```
-
-2. run end to end tests
-
-```bash
-   npm run cy:e2e
-```
-
-### Info
-
-- Cypress Commands [here](https://docs.cypress.io/guides/guides/command-line)
-- Cypress Queries [here](https://docs.cypress.io/api/table-of-contents/)
-- extra info on Queries [here](https://example.cypress.io/)
-- more info [here](https://github.com/cypress-io/cypress-example-kitchensink?tab=readme-ov-file)
-
 ### Improvements(production ready)
 
 The following are points which we could improve or implement in order to be production ready.

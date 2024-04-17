@@ -1,8 +1,8 @@
+import { Button, DialogActions, DialogContent } from '@mui/material';
 import React from 'react';
 import { RoundUpInfo } from '../types';
-import { Button, DialogActions, DialogContent } from '@mui/material';
 
-export type Props = RoundUpInfo & {
+export type Props = Partial<RoundUpInfo> & {
   onCancel: () => void;
   onNextStep: () => void;
 };
@@ -21,7 +21,11 @@ const RoundUp = ({ totalRoundUpAmount, onCancel, onNextStep }: Props) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={onCancel}>No</Button>
-        <Button onClick={onNextStep} variant='contained' color='primary'>
+        <Button
+          onClick={onNextStep}
+          variant='contained'
+          color='primary'
+        >
           Yes
         </Button>
       </DialogActions>

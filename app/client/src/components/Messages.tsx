@@ -1,8 +1,8 @@
+import { Alert } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import { RootState } from '../redux/store';
-import { Alert } from '@mui/material';
 import { resetState } from '../redux/slides/accountsSlice';
+import { RootState } from '../redux/store';
 
 const Messages = () => {
   const dispatch = useAppDispatch();
@@ -28,7 +28,7 @@ const Messages = () => {
   }, [successMessage, dispatch]);
 
   return message ? (
-    <div className=''>
+    <div data-cy='messages'>
       <Alert severity={type}>{message}</Alert>
     </div>
   ) : null;

@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { RoundUpInfo } from '../types';
-import { getStartOfWeek } from 'utils/date';
-import InfoIcon from '../InfoIcon';
-import { roundUpInfo } from 'utils/constants';
-import Modal from '../Modal';
-import { RootState } from 'redux/store';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { fetchWeeklyRoundUp } from 'api/account';
+import React, { useState } from 'react';
+import { RootState } from 'redux/store';
+import { roundUpInfo } from 'utils/constants';
+import { getStartOfWeek } from 'utils/date';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import InfoIcon from '../InfoIcon';
+import Modal from '../Modal';
 import RoundUp from '../savings/RounUp';
 import TransferToSavings from '../savings/TransferToSavings';
+import { RoundUpInfo } from '../types';
 import TransactionTable from './TransactionTable';
 
 const ViewTransactions = () => {
@@ -30,6 +30,9 @@ const ViewTransactions = () => {
   const [roundupInfo, setRoundupInfo] = useState<RoundUpInfo>();
 
   const handleRoundUp = async () => {
+    if (!selectedAccount) {
+      return;
+    }
     dispatch(
       fetchWeeklyRoundUp({
         accountUid: selectedAccount.accountUid,
@@ -83,8 +86,7 @@ const ViewTransactions = () => {
               />
             ) : (
               <TransferToSavings
-                savingAccounts={roundupInfo.savingAccounts}
-                totalRoundUpAmount={roundupInfo.totalRoundUpAmount}
+                {...roundupInfo}
                 onCancel={handleModalClose}
               />
             )}
@@ -92,7 +94,7 @@ const ViewTransactions = () => {
         </div>
       ) : (
         !isLoading &&
-        selectedAccount && (
+        !selectedAccount && (
           <div className='flex  justify-center m-5'>
             <p>No transactions available.</p>
           </div>

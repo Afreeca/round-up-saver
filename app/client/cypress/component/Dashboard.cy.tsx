@@ -11,7 +11,7 @@ describe('Account Viewer', () => {
   });
 
   it('renders loading state initially', () => {
-    store.dispatch(fetchAccounts.pending('accounts/fetchAccounts'));
-    cy.get('[data-cy=spinner]').should('be.visible');
+    store.dispatch(fetchAccounts.pending('accounts/fetchAccounts/pending'));
+    cy.getByTestId('spinner').should('be.visible');
   });
 });
