@@ -12,9 +12,9 @@
     "strictNullChecks": true,
     "noUnusedLocals": true,
     "allowJs": true,
-    "types": ["node", "cypress", "jest"],
+    "types": ["node", "cypress"],
     "typeRoots": ["node_modules/@types"]
   },
-  "include": ["src", "cypress", "tests"],
-  "exclude": ["public", "node_modules", "cypress.config.ts"]
+  "include": ["src", "cypress", "cypress.config.ts"],
+  "exclude": ["public", "node_modules"]
 }

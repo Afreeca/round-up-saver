@@ -54,9 +54,13 @@ const ViewTransactions = () => {
     setCurrentStep(1); // reset steps
   };
 
+  if (!selectedAccount) {
+    return null;
+  }
+
   return (
     <>
-      {transactions?.length > 0 && selectedAccount ? (
+      {transactions?.length > 0 ? (
         <div className='bg-stone-50 flex flex-col gap-2 z-50'>
           <TransactionTable />
           <div className='flex gap-1 items-center'>
@@ -93,8 +97,7 @@ const ViewTransactions = () => {
           </Modal>
         </div>
       ) : (
-        !isLoading &&
-        !selectedAccount && (
+        !isLoading && (
           <div className='flex  justify-center m-5'>
             <p>No transactions available.</p>
           </div>

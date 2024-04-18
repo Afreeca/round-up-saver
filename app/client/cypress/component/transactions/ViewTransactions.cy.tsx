@@ -8,7 +8,7 @@ import { getStore } from '../../../src/redux/store';
 describe('ViewTransactions', () => {
   const store = getStore();
   beforeEach(() => {
-    cy.mount(<ViewTransactions />);
+    cy.mount(<ViewTransactions />, { reduxStore: store });
   });
 
   it('Should display a message when fetching transactions fails', () => {
@@ -61,6 +61,6 @@ describe('ViewTransactions', () => {
       })
     );
 
-    cy.get('p').should('contain.text', '');
+    cy.get('p').should('not.exist');
   });
 });
