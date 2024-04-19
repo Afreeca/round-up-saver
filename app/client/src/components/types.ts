@@ -21,7 +21,7 @@ export type AccountInfo = {
 };
 
 export type AccountProps = {
-  data: Account;
+  data: Account | undefined;
 };
 
 export type TransactionDetails = {

@@ -12,7 +12,19 @@ export const getDirectionColor = (direction: Direction) => {
   }
 };
 
-export const TRANSACTION_COLUMNS = [
+export type TransactionColumn = {
+  accessorKey: string;
+  header: string;
+  Cell?: ({
+    renderedCellValue,
+    row,
+  }: {
+    renderedCellValue: any;
+    row: any;
+  }) => JSX.Element;
+};
+
+export const TRANSACTION_COLUMNS: TransactionColumn[] = [
   {
     accessorKey: 'direction',
     header: 'Direction',

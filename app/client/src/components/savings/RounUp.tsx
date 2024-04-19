@@ -1,4 +1,4 @@
-import { Button, DialogActions, DialogContent } from '@mui/material';
+import { Box, Button, DialogActions, DialogContent } from '@mui/material';
 import React from 'react';
 import { RoundUpInfo } from '../types';
 
@@ -9,7 +9,7 @@ export type Props = Partial<RoundUpInfo> & {
 
 const RoundUp = ({ totalRoundUpAmount, onCancel, onNextStep }: Props) => {
   return (
-    <>
+    <Box data-cy='roundUp'>
       <DialogContent>
         <span className='text-base font-bold'>
           Total Roundup Amount:
@@ -20,7 +20,12 @@ const RoundUp = ({ totalRoundUpAmount, onCancel, onNextStep }: Props) => {
         <p>Would you like to transfer this amount to your savings goal?</p>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onCancel}>No</Button>
+        <Button
+          onClick={onCancel}
+          variant='outlined'
+        >
+          No
+        </Button>
         <Button
           onClick={onNextStep}
           variant='contained'
@@ -29,7 +34,7 @@ const RoundUp = ({ totalRoundUpAmount, onCancel, onNextStep }: Props) => {
           Yes
         </Button>
       </DialogActions>
-    </>
+    </Box>
   );
 };
 

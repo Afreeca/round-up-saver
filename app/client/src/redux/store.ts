@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import accountsReducer from './slides/accountsSlice';
+import accountsReducer from './slices/accountsSlice';
 
 const reducers = combineReducers({
   accounts: accountsReducer,

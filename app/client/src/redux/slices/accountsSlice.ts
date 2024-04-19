@@ -6,7 +6,7 @@ import {
   fetchWeeklyRoundUp,
 } from 'api/account';
 import { Account, AccountsState } from 'components/types';
-import { RootState } from '../../redux/store';
+import { RootState } from '../store';
 
 const initialState: AccountsState = {
   accounts: [],

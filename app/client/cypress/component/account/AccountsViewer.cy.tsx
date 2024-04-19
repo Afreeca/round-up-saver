@@ -1,78 +1,101 @@
+import { Account } from 'components/types';
 import React from 'react';
-import { fetchAccounts } from '../../../src/api/account';
+import { fDate } from 'utils/date';
 import AccountsViewer from '../../../src/components/account/AccountsViewer';
-import { Account } from '../../../src/components/types';
-import { getStore } from '../../../src/redux/store';
-import { fDate } from '../../../src/utils/date';
 
 describe('Account Viewer', () => {
-  const store = getStore();
-  beforeEach(() => {
-    store.dispatch(fetchAccounts());
-    cy.mount(<AccountsViewer />, { reduxStore: store });
+  let accounts: Account[];
+
+  before(() => {
+    cy.fixture('accounts.json').then((data) => {
+      accounts = data;
+    });
   });
 
-  it('should display message for no account available', () => {
-    store.dispatch(fetchAccounts.fulfilled({ accounts: [] }, ''));
+  it('should display message when user does not have accounts', () => {
+    cy.mount(<AccountsViewer />);
+    cy.intercept('GET', 'api/accounts', {
+      statusCode: 200,
+      body: { accounts: [] },
+    }).as('fetchEmptyAccounts');
+
+    cy.wait('@fetchEmptyAccounts');
+
     cy.getByTestId('account-viewer').should(
       'contain.text',
       'No accounts available.'
     );
   });
 
-  it('displays accounts information', () => {
-    cy.fixture('accounts.json').then((accounts) => {
-      store.dispatch(fetchAccounts.fulfilled({ accounts }, ''));
+  it('should displays accounts information when user has account', () => {
+    cy.mount(<AccountsViewer />);
+    cy.intercept('GET', 'api/accounts', {
+      body: { statusCode: 200, accounts: accounts },
+    }).as('fetchAccounts');
 
-      cy.contains('No accounts available').should('not.exist');
-      cy.getByTestId('account-viewer')
-        .find('[data-cy=account-card]')
-        .should('have.length', 1);
-    });
-  });
+    cy.wait('@fetchAccounts');
 
-  it('display card information correctly', () => {
-    cy.fixture('accounts.json').then((accounts) => {
-      const account: Account = accounts[0];
-      fetchAccounts.fulfilled(
-        {
-          accounts: [account],
-        },
-        ''
-      );
+    cy.getByTestId('account-viewer').should(
+      'not.contain.text',
+      'No accounts available.'
+    );
 
-      cy.getByTestId('account-viewer').should('be.visible');
+    cy.getByTestId('account-card').should('be.visible').as('accountCard');
 
-      cy.getByTestId('account-card').should('be.visible').as('accountCard');
+    cy.getByTestId('account-viewer').should('be.visible');
 
-      cy.get('@accountCard')
-        .contains('Account Information')
-        .should('be.visible');
+    cy.getByTestId('account-card').should('be.visible').as('accountCard');
 
-      cy.get('@accountCard')
-        .contains('Account Information')
-        .should('have.length', 1);
+    cy.get('@accountCard').contains('Account Information').should('be.visible');
 
-      cy.get('@accountCard')
-        .contains(`Name: ${account.name}`)
-        .should('be.visible');
-
-      cy.get('@accountCard')
-        .contains(`Currency: ${account.currency}`)
-        .should('be.visible');
-
-      cy.get('@accountCard')
-        .contains(`Type: ${account.accountType}`)
-        .should('be.visible');
-
-      cy.get('@accountCard')
-        .contains(`Created: ${fDate(account.createdAt)}`)
-        .should('be.visible');
-    });
+    cy.get('@accountCard')
+      .contains('Account Information')
+      .should('have.length', 1);
 
     cy.getByTestId('account-viewer')
       .find('button')
       .contains('View transactions')
       .should('be.visible');
+
+    accounts.forEach((account, index) => {
+      cy.get('@accountCard')
+        .contains(`Name: ${accounts[index].name}`)
+        .should('be.visible');
+
+      cy.get('@accountCard')
+        .contains(`Currency: ${accounts[index].currency}`)
+        .should('be.visible');
+
+      cy.get('@accountCard')
+        .contains(`Type: ${accounts[index].accountType}`)
+        .should('be.visible');
+
+      cy.get('@accountCard')
+        .contains(`Created: ${fDate(accounts[index].createdAt)}`)
+        .should('be.visible');
+
+      cy.get('@accountCard')
+        .contains(`Type: ${accounts[index].accountType}`)
+        .should('be.visible');
+
+      cy.get('@accountCard')
+        .contains(`Created: ${fDate(accounts[index].createdAt)}`)
+        .should('be.visible');
+    });
+  });
+
+  it('should display message when the request fails', () => {
+    cy.mount(<AccountsViewer />);
+    cy.intercept('GET', 'api/accounts', {
+      statusCode: 500,
+      body: { message: 'error' },
+    }).as('fetchAccountsError');
+
+    cy.wait('@fetchAccountsError');
+
+    cy.getByTestId('account-viewer').should(
+      'contain.text',
+      'No accounts available.'
+    );
   });
 });

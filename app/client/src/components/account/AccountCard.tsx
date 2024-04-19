@@ -2,7 +2,7 @@ import { fetchTransactions } from 'api/account';
 import React from 'react';
 import { fDate, getStartOfWeek } from 'utils/date';
 import { useAppDispatch } from '../../redux/hooks';
-import { setSelectedAccount } from '../../redux/slides/accountsSlice';
+import { setSelectedAccount } from '../../redux/slices/accountsSlice';
 import { AccountProps, TransactionDetails } from '../types';
 
 const Account = ({ data }: AccountProps) => {
@@ -11,9 +11,13 @@ const Account = ({ data }: AccountProps) => {
   const handleFetchTransactions = async (
     transactionData: TransactionDetails
   ) => {
-    dispatch(setSelectedAccount(data));
+    dispatch(setSelectedAccount(data!));
     dispatch(fetchTransactions(transactionData));
   };
+
+  if (!data) {
+    return null;
+  }
 
   return (
     <div

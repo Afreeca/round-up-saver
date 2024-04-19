@@ -1,0 +1,9 @@
+[
+  {
+    "savingsGoalUid": "1",
+    "name": "name 1",
+    "totalSaved": { "minorUnits": 500, "currency": "GBP" },
+    "sortOrder": 1,
+    "state": "active"
+  }
+]

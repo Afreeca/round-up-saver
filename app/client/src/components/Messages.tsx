@@ -1,7 +1,7 @@
 import { Alert } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import { resetState } from '../redux/slides/accountsSlice';
+import { resetState } from '../redux/slices/accountsSlice';
 import { RootState } from '../redux/store';
 
 const Messages = () => {

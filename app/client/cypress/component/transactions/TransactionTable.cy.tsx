@@ -1,15 +1,19 @@
+import { Account } from 'components/types';
 import React from 'react';
 import { fetchTransactions } from '../../../src/api/account';
 import TransactionTable from '../../../src/components/transactions/TransactionTable';
 import { getStore } from '../../../src/redux/store';
 import { getStartOfWeek } from '../../../src/utils/date';
+import { testAccountHasTransaction } from '../../helpers/test.utils';
 
-describe('Loader', () => {
+describe('TransactionTable', () => {
   const store = getStore();
+  let account: Account;
 
   before(() => {
-    cy.fixture('accounts.json').then((accounts) => {
-      const account = accounts[0];
+    cy.fixture('accounts.json').then((acc) => {
+      account = acc[0];
+
       store.dispatch(
         fetchTransactions({
           accountUid: account.accountUid,
@@ -17,30 +21,24 @@ describe('Loader', () => {
           changesSince: getStartOfWeek(),
         })
       );
-      cy.mount(<TransactionTable />, { reduxStore: store });
     });
   });
 
-  it('Should not display if there are no transaction', () => {
-    store.dispatch(
-      fetchTransactions.fulfilled({ feedItems: [] }, '', {
-        accountUid: '',
-        categoryUid: '',
-        changesSince: '',
-      })
-    );
-    cy.getByTestId('transaction-table').should('not.exist');
+  beforeEach(() => {
+    cy.mount(<TransactionTable />, { reduxStore: store });
   });
 
-  it('Should not display when acount is not selected', () => {
-    cy.fixture('transactions.json').then((transactions) => {
-      store.dispatch(
-        fetchTransactions.fulfilled({ feedItems: transactions }, '', {
-          accountUid: '',
-          categoryUid: '',
-          changesSince: '',
-        })
-      );
+  describe('Account has no transactions', () => {
+    it('Should not display', () => {
+      cy.getByTestId('transaction-table').should('not.exist');
+    });
+  });
+
+  describe('Account has transactions', () => {
+    it('Should display the transaction table', () => {
+      cy.fixture('transactions.json').then((transactions) => {
+        testAccountHasTransaction(transactions, account, store);
+      });
     });
   });
 });

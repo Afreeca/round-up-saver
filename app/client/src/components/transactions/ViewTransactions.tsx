@@ -61,7 +61,10 @@ const ViewTransactions = () => {
   return (
     <>
       {transactions?.length > 0 ? (
-        <div className='bg-stone-50 flex flex-col gap-2 z-50'>
+        <div
+          className='bg-stone-50 flex flex-col gap-2 z-50'
+          data-cy='transactions'
+        >
           <TransactionTable />
           <div className='flex gap-1 items-center'>
             <button

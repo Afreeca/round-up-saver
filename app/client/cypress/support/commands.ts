@@ -14,6 +14,6 @@ Cypress.Commands.add(
   }
 );
 
-Cypress.Commands.add('getByTestId', (testId) => {
-  return cy.get(`[data-cy=${testId}]`);
+Cypress.Commands.add('getByTestId', (selector, ...args) => {
+  return cy.get(`[data-cy=${selector}]`);
 });
