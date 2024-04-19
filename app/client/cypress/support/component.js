@@ -19,14 +19,30 @@ import './commands';
 // require('./commands')
 
 import { mount } from 'cypress/react18';
-import { Provider } from 'react-redux';
 import { getStore } from '../../src/redux/store';
+
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+
+const CentralisedWrapper = ({ children }) => (
+  <div className='flex justify-center items-center h-screen'>{children}</div>
+);
 
 Cypress.Commands.add('mount', (component, options = {}) => {
   // Use the default store if one is not provided
-  const { reduxStore = getStore(), ...mountOptions } = options;
+  const { reduxStore = getStore(), centralised, ...mountOptions } = options;
 
-  const wrapped = <Provider store={reduxStore}>{component}</Provider>;
+  const wrappedComponent = <Provider store={reduxStore}>{component}</Provider>;
 
-  return mount(wrapped, mountOptions);
+  if (centralised) {
+    const container = document.createElement('div');
+    ReactDOM.render(
+      <CentralisedWrapper>{wrappedComponent}</CentralisedWrapper>,
+      container
+    );
+    document.body.appendChild(container);
+    return cy.wrap(container);
+  } else {
+    return mount(wrappedComponent, mountOptions);
+  }
 });

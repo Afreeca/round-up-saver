@@ -22,7 +22,8 @@ describe('RoundUp', () => {
         onNextStep={onNextStepSpy}
         savingAccounts={accounts}
         totalRoundUpAmount={roundUpAmount}
-      />
+      />,
+      { centralised: true }
     );
 
     cy.getByTestId('roundUp')

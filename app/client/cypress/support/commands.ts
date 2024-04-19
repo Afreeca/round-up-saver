@@ -1,10 +1,7 @@
 /// <reference types="cypress" />
 
-import { mount } from 'cypress/react18';
 import { ApiAction } from '.';
 import { getStore } from '../../src/redux/store';
-
-Cypress.Commands.add('mount', mount);
 
 Cypress.Commands.add(
   'mockApiResponseError',

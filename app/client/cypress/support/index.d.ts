@@ -27,7 +27,10 @@ declare global {
        */
       mount(
         component: React.ReactNode,
-        options?: MountOptions & { reduxStore?: EnhancedStore<RootState> }
+        options?: MountOptions & {
+          centralised?: boolean;
+          reduxStore?: EnhancedStore<RootState>;
+        }
       ): Cypress.Chainable<MountReturn>;
       getByTestId(testId: string): Chainable<JQuery<HTMLElement>>;
       mockApiResponseError<TPayload>(

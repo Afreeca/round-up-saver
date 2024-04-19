@@ -1,4 +1,4 @@
-import { Button, DialogActions, DialogContent } from '@mui/material';
+import { Box, Button, DialogActions, DialogContent } from '@mui/material';
 import { addSavings } from 'api/account';
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
@@ -46,7 +46,7 @@ const TransferToSavings = ({
   };
 
   return (
-    <>
+    <Box data-cy='transferToSaving'>
       <DialogContent>
         <div>
           {savingAccounts && savingAccounts?.length > 0 ? (
@@ -84,7 +84,7 @@ const TransferToSavings = ({
           Transfer
         </Button>
       </DialogActions>
-    </>
+    </Box>
   );
 };
 

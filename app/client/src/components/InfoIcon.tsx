@@ -20,7 +20,10 @@ const InfoIcon = ({ text }: { text: string }) => {
       data-cy='infoIcon'
     >
       {isHovered && (
-        <div className='absolute z-10 bottom-full left-1/2 transform -translate-x-1/2 mb-5 w-64 bg-blue-100 shadow-lg rounded-lg p-4'>
+        <div
+          className='absolute z-10 bottom-full left-1/2 transform -translate-x-1/2 mb-5 w-64 bg-blue-100 shadow-lg rounded-lg p-4'
+          data-cy='infoText'
+        >
           {IncoSvg}
           <p>{text}</p>
         </div>
